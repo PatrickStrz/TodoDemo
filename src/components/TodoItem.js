@@ -18,9 +18,6 @@ const Box = styled.div`
 const TextButton = styled.p`
   color: ${COLORS.text};
   cursor: pointer;
-  par:hover: {
-    color: red;
-  }
 `
 
 const Par = styled.p`
@@ -34,17 +31,17 @@ const TodoItem = ({
   dueDate,
   onDeleteClick,
   onEditClick,
-  //   onMarkPendingClick,
-  //   onMarkDoneClick,
   onChangeStatus,
   onToggleStatus,
-  status
+  status,
+  onEditButtonClick
 }) => {
   return (
     <Box done={status === STATUS.DONE}>
       <Par>{title}</Par>
       <Par>{description}</Par>
       <Par>{dueDate}</Par>
+      <TextButton onClick={onEditButtonClick}>Edit</TextButton>
       <TextButton
         onClick={() => {
           onToggleStatus(id)
@@ -65,7 +62,10 @@ TodoItem.propTypes = {
   onDeleteClick: PropTypes.func.isRequired,
   onToggleStatus: PropTypes.func.isRequired,
   onEditClick: PropTypes.func.isRequired,
-  status: PropTypes.string.isRequired
+  status: PropTypes.string.isRequired,
+  onEditButtonClick: PropTypes.string.isRequired,
+  editModalVisible: PropTypes.bool.isRequired,
+  onEditModalClose: PropTypes.func.isRequired
 }
 
 export default TodoItem
