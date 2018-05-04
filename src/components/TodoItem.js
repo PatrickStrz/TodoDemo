@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import Modal from 'react-modal'
 import COLORS from '../constants/Colors'
 import STATUS from '../constants/Status'
 
@@ -30,18 +31,19 @@ const TodoItem = ({
   description,
   dueDate,
   onDeleteClick,
-  onEditClick,
   onChangeStatus,
   onToggleStatus,
   status,
-  onEditButtonClick
+  onEditClick,
+  editModalVisible,
+  onEditModalClose
 }) => {
   return (
     <Box done={status === STATUS.DONE}>
       <Par>{title}</Par>
       <Par>{description}</Par>
       <Par>{dueDate}</Par>
-      <TextButton onClick={onEditButtonClick}>Edit</TextButton>
+      <TextButton onClick={onEditClick}>Edit</TextButton>
       <TextButton
         onClick={() => {
           onToggleStatus(id)
@@ -50,6 +52,15 @@ const TodoItem = ({
         {status === STATUS.DONE ? 'Mark pending' : 'Mark Done'}
       </TextButton>
       <TextButton onClick={() => onDeleteClick(id)}>X</TextButton>
+      <Modal
+        isOpen={editModalVisible}
+        onRequestClose={onEditModalClose}
+        style={customModalStyles}
+        contentLabel="Example Modal"
+      >
+        <button onClick={onEditModalClose}>close</button>
+        <div>I am a modal</div>
+      </Modal>
     </Box>
   )
 }
@@ -61,11 +72,21 @@ TodoItem.propTypes = {
   dueDate: PropTypes.string.isRequired,
   onDeleteClick: PropTypes.func.isRequired,
   onToggleStatus: PropTypes.func.isRequired,
-  onEditClick: PropTypes.func.isRequired,
   status: PropTypes.string.isRequired,
-  onEditButtonClick: PropTypes.string.isRequired,
+  onEditClick: PropTypes.func.isRequired,
   editModalVisible: PropTypes.bool.isRequired,
   onEditModalClose: PropTypes.func.isRequired
+}
+
+const customModalStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
 }
 
 export default TodoItem

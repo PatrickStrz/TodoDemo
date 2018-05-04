@@ -35,7 +35,8 @@ class App extends Component {
         status: ''
       }
       */
-    ]
+    ],
+    editModalVisible: false
   }
   render() {
     return (
@@ -50,7 +51,9 @@ class App extends Component {
             onDeleteClick={this._handleDeleteClick}
             status={todo.status}
             onToggleStatus={this._handleToggleStatus}
-            onEditClick={() => alert('clicked edit')}
+            onEditClick={this._showEditModal}
+            editModalVisible={this.state.editModalVisible}
+            onEditModalClose={this._hideEditModal}
           />
         ))}
         <CreateTodoForm onSubmit={this._handleTodoSubmit} />
@@ -97,6 +100,9 @@ class App extends Component {
     ]
     this.setState({ todos: newTodos })
   }
+
+  _showEditModal = () => this.setState({ editModalVisible: true })
+  _hideEditModal = () => this.setState({ editModalVisible: false })
 }
 
 export default App
