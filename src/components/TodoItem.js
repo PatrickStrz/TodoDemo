@@ -5,6 +5,7 @@ import COLORS from '../constants/Colors'
 import STATUS from '../constants/Status'
 
 const Box = styled.div`
+  margin-bottom: 10px;
   display: flex;
   justify-content: space-around;
   align-items: center;

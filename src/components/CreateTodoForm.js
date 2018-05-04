@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import COLORS from '../constants/Colors'
 import STATUS from '../constants/Status'
 import uuid from 'uuid/v1'
+import moment from 'moment'
 
 const Box = styled.div`
   padding: 15px;
@@ -93,7 +94,8 @@ export default class CreateTodoForm extends Component {
       title,
       description,
       id: uuid(),
-      status: STATUS.PENDING
+      status: STATUS.PENDING,
+      createdAt: moment().format('YYYY-MM-DD')
     })
     this._clearValues()
   }
