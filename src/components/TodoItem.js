@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Modal from 'react-modal'
 import COLORS from '../constants/Colors'
 import STATUS from '../constants/Status'
+import EditTodoForm from './EditTodoForm'
 
 const Box = styled.div`
   margin-bottom: 10px;
@@ -21,7 +22,7 @@ const TextButton = styled.p`
   cursor: pointer;
 `
 
-const Par = styled.p`
+const P = styled.p`
   margin: 5px;
 `
 
@@ -36,13 +37,14 @@ const TodoItem = ({
   status,
   onEditClick,
   editModalVisible,
-  onEditModalClose
+  onEditModalClose,
+  onEditSubmit
 }) => {
   return (
     <Box done={status === STATUS.DONE}>
-      <Par>{title}</Par>
-      <Par>{description}</Par>
-      <Par>{dueDate}</Par>
+      <P>{title}</P>
+      <P>{description}</P>
+      <P>{dueDate}</P>
       <TextButton onClick={onEditClick}>Edit</TextButton>
       <TextButton
         onClick={() => {
@@ -59,7 +61,15 @@ const TodoItem = ({
         contentLabel="Example Modal"
       >
         <button onClick={onEditModalClose}>close</button>
-        <div>I am a modal</div>
+
+        <EditTodoForm
+          id={id}
+          title={title}
+          description={description}
+          dueDate={dueDate}
+          onSubmit={onEditSubmit}
+          onComplete={onEditModalClose}
+        />
       </Modal>
     </Box>
   )
@@ -75,17 +85,17 @@ TodoItem.propTypes = {
   status: PropTypes.string.isRequired,
   onEditClick: PropTypes.func.isRequired,
   editModalVisible: PropTypes.bool.isRequired,
-  onEditModalClose: PropTypes.func.isRequired
+  onEditModalClose: PropTypes.func.isRequired,
+  onEditSubmit: PropTypes.func.isRequired
 }
 
 const customModalStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.background
   }
 }
 

@@ -1,16 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import uuid from 'uuid/v1'
-import moment from 'moment'
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
 import COLORS from '../constants/Colors'
-import STATUS from '../constants/Status'
+import DatePicker from 'react-datepicker'
+import moment from 'moment'
+import 'react-datepicker/dist/react-datepicker.css'
 import Button from './Button'
 
 const Box = styled.div`
-  margin-top: w0px;
   padding: 15px;
   display: flex;
   flex-direction: column;
@@ -36,17 +33,22 @@ const Label = styled.p`
   font-size: 17px;
 `
 
-export default class CreateTodoForm extends Component {
+export default class EditTodoForm extends Component {
   static propTypes = {
-    onSubmit: PropTypes.func.isRequired
+    id: PropTypes.string.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    dueDate: PropTypes.string.isRequired,
+    onComplete: PropTypes.func
   }
 
   state = {
-    title: '',
-    description: '',
-    createdAt: '',
-    dueDate: moment()
+    title: this.props.title,
+    description: this.props.description,
+    dueDate: moment(this.props.dueDate)
   }
+
   render() {
     return (
       <Box>
@@ -82,27 +84,14 @@ export default class CreateTodoForm extends Component {
   }
   _handleDueDateChange = date => this.setState({ dueDate: date })
 
-  _clearValues = () =>
-    this.setState({
-      title: '',
-      description: '',
-      createdAt: '',
-      dueDate: moment()
-    })
-
   _handleSubmit = () => {
+    const { onSubmit, onComplete } = this.props
     const { title, description, dueDate } = this.state
     if (!title || !description || !dueDate) {
       alert('you must comlete all fields')
       return
     }
-    this.props.onSubmit({
-      title,
-      description,
-      id: uuid(),
-      status: STATUS.PENDING,
-      dueDate: dueDate.toString()
-    })
-    this._clearValues()
+    onSubmit(this.props.id, title, description, dueDate.toString())
+    onComplete()
   }
 }

@@ -24,18 +24,7 @@ const SiteBox = styled.div`
 
 class App extends Component {
   state = {
-    todos: [
-      /* todoShape:
-      {
-        id: '',
-        title: '',
-        description: '',
-        dateCreated: '',
-        dueDate: '',
-        status: ''
-      }
-      */
-    ],
+    todos: [],
     editModalVisible: false
   }
   render() {
@@ -47,13 +36,14 @@ class App extends Component {
             id={todo.id}
             title={todo.title}
             description={todo.description}
-            dueDate={todo.dueDate || ' '}
+            dueDate={todo.dueDate}
             onDeleteClick={this._handleDeleteClick}
             status={todo.status}
             onToggleStatus={this._handleToggleStatus}
             onEditClick={this._showEditModal}
             editModalVisible={this.state.editModalVisible}
             onEditModalClose={this._hideEditModal}
+            onEditSubmit={this._handleEditSubmit}
           />
         ))}
         <CreateTodoForm onSubmit={this._handleTodoSubmit} />
@@ -96,6 +86,24 @@ class App extends Component {
     const indexOfTodo = todos.findIndex(todo => todo.id === id)
     const newTodos = [
       ...todos.slice(0, indexOfTodo),
+      ...todos.slice(indexOfTodo + 1)
+    ]
+    this.setState({ todos: newTodos })
+  }
+
+  _handleEditSubmit = (id, title, description, dueDate) => {
+    const { todos } = this.state
+    const indexOfTodo = todos.findIndex(todo => todo.id === id)
+    const todo = todos[indexOfTodo]
+    const updatedTodo = {
+      ...todo,
+      title,
+      description,
+      dueDate
+    }
+    const newTodos = [
+      ...todos.slice(0, indexOfTodo),
+      updatedTodo,
       ...todos.slice(indexOfTodo + 1)
     ]
     this.setState({ todos: newTodos })
