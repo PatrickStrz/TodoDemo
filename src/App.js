@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import styled from "styled-components"
 import COLORS from "./constants/Colors"
 
+import CreateTodoForm from "./components/CreateTodoForm"
+
 const SiteBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -19,7 +21,11 @@ class App extends Component {
     ]
   }
   render() {
-    return <SiteBox />
+    return (
+      <SiteBox>
+        <CreateTodoForm />
+      </SiteBox>
+    )
   }
 }
 
