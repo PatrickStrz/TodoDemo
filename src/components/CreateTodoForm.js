@@ -62,14 +62,13 @@ export default class CreateTodoForm extends Component {
           placeholder="Description"
           value={this.state.description}
           name="description"
-          onChange={this._handleTitleChange}
+          onChange={this._handleDescriptionChange}
         />
         <Input
           type="text"
           placeholder="Due Date"
           value={this.state.dueDate}
           name="dueDate"
-          onChange={this._handleTitleChange}
         />
         <p>{this.state.title}</p>
         <Button onClick={this._handleSubmit}>Submit</Button>

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import COLORS from './constants/Colors'
 
 import CreateTodoForm from './components/CreateTodoForm'
+import TodoItem from './components/TodoItem'
 
 const SiteBox = styled.div`
   display: flex;
@@ -24,14 +25,31 @@ const SiteBox = styled.div`
 class App extends Component {
   state = {
     todos: [
-      { title: '', description: '', dateCreated: '', dueDate: '', status: '' }
+      /* todoShape:
+      {
+        id: '',
+        title: '',
+        description: '',
+        dateCreated: '',
+        dueDate: '',
+        status: ''
+      }
+      */
     ]
   }
   render() {
     return (
       <SiteBox>
         <CreateTodoForm onSubmit={this._handleTodoSubmit} />
-        {this.state.todos.map(todo => <p>{todo.title}</p>)}
+        {this.state.todos.map(todo => (
+          <TodoItem
+            id={todo.id}
+            title={todo.title}
+            description={todo.description}
+            dueDate={todo.dueDate}
+            onDeleteClick={this._handleDeleteClick}
+          />
+        ))}
       </SiteBox>
     )
   }
@@ -44,6 +62,9 @@ class App extends Component {
     this.setState((prevState, props) => {
       return { todos: this.addToList(prevState.todos, todo) }
     })
+  }
+  _handleDeleteClick = () => {
+    alert('clicked delete')
   }
 }
 
