@@ -10,7 +10,7 @@ const FormBox = styled.div`
   align-items: center;
   height: 200px;
   width: 25%;
-  border: 1px solid ${COLORS.outline};
+  border: 2px solid ${COLORS.outline};
   border-radius: 5px;
 `
 
