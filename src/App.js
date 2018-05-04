@@ -40,7 +40,6 @@ class App extends Component {
   render() {
     return (
       <SiteBox>
-        <CreateTodoForm onSubmit={this._handleTodoSubmit} />
         {this.state.todos.map(todo => (
           <TodoItem
             id={todo.id}
@@ -48,8 +47,11 @@ class App extends Component {
             description={todo.description}
             dueDate={todo.dueDate}
             onDeleteClick={this._handleDeleteClick}
+            status={todo.status}
+            onEditPress={() => alert('clicked edit')}
           />
         ))}
+        <CreateTodoForm onSubmit={this._handleTodoSubmit} />
       </SiteBox>
     )
   }

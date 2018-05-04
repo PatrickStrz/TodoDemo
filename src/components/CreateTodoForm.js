@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import COLORS from '../constants/Colors'
+import STATUS from '../constants/Status'
 
 const Box = styled.div`
   padding: 15px;
@@ -87,7 +88,12 @@ export default class CreateTodoForm extends Component {
 
   _handleSubmit = () => {
     const { title, description } = this.state
-    this.props.onSubmit({ title, description })
+    this.props.onSubmit({
+      title,
+      description,
+      id: 'some random id',
+      status: STATUS.PENDING
+    })
     this._clearValues()
   }
 }
