@@ -1,8 +1,8 @@
-import React, { Component } from "react"
-import styled from "styled-components"
-import COLORS from "./constants/Colors"
+import React, { Component } from 'react'
+import styled from 'styled-components'
+import COLORS from './constants/Colors'
 
-import CreateTodoForm from "./components/CreateTodoForm"
+import CreateTodoForm from './components/CreateTodoForm'
 
 const SiteBox = styled.div`
   display: flex;
@@ -12,12 +12,19 @@ const SiteBox = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${COLORS.background};
+  /* ignore highlights in browser:  */
+  input:focus,
+  select:focus,
+  textarea:focus,
+  button:focus {
+    outline: none;
+  }
 `
 
 class App extends Component {
   state = {
     todos: [
-      { title: "", description: "", dateCreated: "", dueDate: "", status: "" }
+      { title: '', description: '', dateCreated: '', dueDate: '', status: '' }
     ]
   }
   render() {
