@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import COLORS from './constants/Colors'
-
+import STATUS from './constants/Status'
 import CreateTodoForm from './components/CreateTodoForm'
 import TodoItem from './components/TodoItem'
 
@@ -42,13 +42,15 @@ class App extends Component {
       <SiteBox>
         {this.state.todos.map(todo => (
           <TodoItem
+            key={todo.id}
             id={todo.id}
             title={todo.title}
             description={todo.description}
-            dueDate={todo.dueDate}
+            dueDate={todo.dueDate || ' '}
             onDeleteClick={this._handleDeleteClick}
             status={todo.status}
-            onEditPress={() => alert('clicked edit')}
+            onToggleStatus={this._handleToggleStatus}
+            onEditClick={() => alert('clicked edit')}
           />
         ))}
         <CreateTodoForm onSubmit={this._handleTodoSubmit} />
@@ -67,6 +69,33 @@ class App extends Component {
   }
   _handleDeleteClick = () => {
     alert('clicked delete')
+  }
+
+  _handleToggleStatus = id => {
+    const { todos } = this.state
+    const indexOfTodo = todos.findIndex(todo => todo.id === id)
+    const todo = todos[indexOfTodo]
+    const status = todo.status === STATUS.DONE ? STATUS.PENDING : STATUS.DONE
+    const updatedTodo = {
+      ...todo,
+      status
+    }
+    const newTodos = [
+      ...todos.slice(0, indexOfTodo),
+      updatedTodo,
+      ...todos.slice(indexOfTodo + 1)
+    ]
+    this.setState({ todos: newTodos })
+  }
+
+  _handleDeleteClick = id => {
+    const { todos } = this.state
+    const indexOfTodo = todos.findIndex(todo => todo.id === id)
+    const newTodos = [
+      ...todos.slice(0, indexOfTodo),
+      ...todos.slice(indexOfTodo + 1)
+    ]
+    this.setState({ todos: newTodos })
   }
 }
 

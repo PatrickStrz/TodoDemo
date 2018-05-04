@@ -11,10 +11,20 @@ const Box = styled.div`
   align-items: center;
   min-height: 50px;
   width: 60%;
-  border: 2px solid ${COLORS.outline};
-  border-radius: 2px;
-  background-color: ${COLORS.outline};
+  background-color: ${props => (props.done ? COLORS.success : COLORS.outline)};
   color: ${COLORS.text};
+`
+
+const TextButton = styled.p`
+  color: ${COLORS.text};
+  cursor: pointer;
+  par:hover: {
+    color: red;
+  }
+`
+
+const Par = styled.p`
+  margin: 5px;
 `
 
 const TodoItem = ({
@@ -24,19 +34,28 @@ const TodoItem = ({
   dueDate,
   onDeleteClick,
   onEditClick,
-  onToggle,
+  //   onMarkPendingClick,
+  //   onMarkDoneClick,
+  onChangeStatus,
+  onToggleStatus,
   status
-}) => (
-  <Box>
-    <p>{title}</p>
-    <p>{description}</p>
-    <p>{dueDate}</p>
-    <p onClick={onToggle}>
-      {status === STATUS.DONE ? 'Mark pending' : 'Mark Done'}
-    </p>
-    <p onClick={onDeleteClick}>deleteButton</p>
-  </Box>
-)
+}) => {
+  return (
+    <Box done={status === STATUS.DONE}>
+      <Par>{title}</Par>
+      <Par>{description}</Par>
+      <Par>{dueDate}</Par>
+      <TextButton
+        onClick={() => {
+          onToggleStatus(id)
+        }}
+      >
+        {status === STATUS.DONE ? 'Mark pending' : 'Mark Done'}
+      </TextButton>
+      <TextButton onClick={() => onDeleteClick(id)}>X</TextButton>
+    </Box>
+  )
+}
 
 TodoItem.propTypes = {
   id: PropTypes.string.isRequired,
@@ -44,7 +63,7 @@ TodoItem.propTypes = {
   description: PropTypes.string.isRequired,
   dueDate: PropTypes.string.isRequired,
   onDeleteClick: PropTypes.func.isRequired,
-  onToggle: PropTypes.func.isRequired,
+  onToggleStatus: PropTypes.func.isRequired,
   onEditClick: PropTypes.func.isRequired,
   status: PropTypes.string.isRequired
 }

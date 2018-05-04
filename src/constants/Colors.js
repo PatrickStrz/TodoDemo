@@ -10,6 +10,7 @@ export default {
     .lighten(0.5)
     .toString(),
   main: '#7E57C2',
+  success: '#4ee097',
   secondary: '#89D9ED',
   text: '#fff'
 }
