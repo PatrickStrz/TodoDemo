@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import COLORS from '../constants/Colors'
 import STATUS from '../constants/Status'
+import uuid from 'uuid/v1'
 
 const Box = styled.div`
   padding: 15px;
@@ -91,7 +92,7 @@ export default class CreateTodoForm extends Component {
     this.props.onSubmit({
       title,
       description,
-      id: 'some random id',
+      id: uuid(),
       status: STATUS.PENDING
     })
     this._clearValues()
