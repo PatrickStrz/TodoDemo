@@ -30,9 +30,20 @@ class App extends Component {
   render() {
     return (
       <SiteBox>
-        <CreateTodoForm />
+        <CreateTodoForm onSubmit={this._handleTodoSubmit} />
+        {this.state.todos.map(todo => <p>{todo.title}</p>)}
       </SiteBox>
     )
+  }
+
+  addToList = (todos, newTodo) => {
+    return [...todos, newTodo]
+  }
+
+  _handleTodoSubmit = todo => {
+    this.setState((prevState, props) => {
+      return { todos: this.addToList(prevState.todos, todo) }
+    })
   }
 }
 

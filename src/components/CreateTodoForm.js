@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import COLORS from '../constants/Colors'
 
 const Box = styled.div`
+  padding: 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -46,23 +47,48 @@ export default class CreateTodoForm extends Component {
     dueDate: ''
   }
   render() {
+    const { onSubmit } = this.props
     return (
       <Box>
         <Input
           type="text"
+          placeholder="Title"
           value={this.state.title}
           name="title"
           onChange={this._handleTitleChange}
         />
+        <Input
+          type="text"
+          placeholder="Description"
+          value={this.state.description}
+          name="description"
+          onChange={this._handleTitleChange}
+        />
+        <Input
+          type="text"
+          placeholder="Due Date"
+          value={this.state.dueDate}
+          name="dueDate"
+          onChange={this._handleTitleChange}
+        />
         <p>{this.state.title}</p>
-        <Button>Submit</Button>
+        <Button onClick={this._handleSubmit}>Submit</Button>
       </Box>
     )
   }
+
   _handleTitleChange = e => {
     this.setState({ title: e.target.value })
   }
   _handleDescriptionChange = e => {
     this.setState({ description: e.target.value })
+  }
+  _clearValues = () =>
+    this.setState({ title: '', description: '', createdAt: '', dueDate: '' })
+
+  _handleSubmit = () => {
+    const { title, description } = this.state
+    this.props.onSubmit({ title, description })
+    this._clearValues()
   }
 }

@@ -3,6 +3,9 @@ const tintColor = '#2f95dc'
 const background = '#292D3E'
 export default {
   background,
+  backgroundDark: Color(background)
+    .darken(0.25)
+    .toString(),
   outline: Color(background)
     .lighten(0.5)
     .toString(),
