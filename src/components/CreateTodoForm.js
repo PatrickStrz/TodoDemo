@@ -5,6 +5,8 @@ import COLORS from '../constants/Colors'
 import STATUS from '../constants/Status'
 import uuid from 'uuid/v1'
 import moment from 'moment'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 const Box = styled.div`
   padding: 15px;
@@ -23,7 +25,7 @@ const Input = styled.input`
   font-size: 20px;
   border: 2px solid ${COLORS.outline};
   border-radius: 2px;
-  background-color: ${COLORS.outline};
+  background-color: ${COLORS.background};
   color: ${COLORS.text};
 `
 const Button = styled.div`
@@ -37,6 +39,10 @@ const Button = styled.div`
   border: 2px solid ${COLORS.main};
   border-radius: 2px;
 `
+const Label = styled.p`
+  color: ${COLORS.outline};
+  font-size: 17px;
+`
 
 export default class CreateTodoForm extends Component {
   static propTypes = {
@@ -47,7 +53,7 @@ export default class CreateTodoForm extends Component {
     title: '',
     description: '',
     createdAt: '',
-    dueDate: ''
+    dueDate: moment()
   }
   render() {
     const { onSubmit } = this.props
@@ -67,13 +73,11 @@ export default class CreateTodoForm extends Component {
           name="description"
           onChange={this._handleDescriptionChange}
         />
-        <Input
-          type="text"
-          placeholder="Due Date"
-          value={this.state.dueDate}
-          name="dueDate"
+        <Label>Pick a due date:</Label>
+        <DatePicker
+          selected={this.state.dueDate}
+          onChange={this._handleDueDateChange}
         />
-        <p>{this.state.title}</p>
         <Button onClick={this._handleSubmit}>Submit</Button>
       </Box>
     )
@@ -85,11 +89,22 @@ export default class CreateTodoForm extends Component {
   _handleDescriptionChange = e => {
     this.setState({ description: e.target.value })
   }
+  _handleDueDateChange = date => this.setState({ dueDate: date })
+
   _clearValues = () =>
-    this.setState({ title: '', description: '', createdAt: '', dueDate: '' })
+    this.setState({
+      title: '',
+      description: '',
+      createdAt: '',
+      dueDate: moment()
+    })
 
   _handleSubmit = () => {
-    const { title, description } = this.state
+    const { title, description, dueDate } = this.state
+    if (!title || !description || !dueDate) {
+      alert('you must comlete all fields')
+      return
+    }
     this.props.onSubmit({
       title,
       description,
