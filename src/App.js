@@ -1,20 +1,25 @@
 import React, { Component } from "react"
-import logo from "./logo.svg"
-import "./App.css"
+import styled from "styled-components"
+import COLORS from "./constants/Colors"
+
+const SiteBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-width: 100vw;
+  justify-content: center;
+  align-items: center;
+  background-color: ${COLORS.background};
+`
 
 class App extends Component {
+  state = {
+    todos: [
+      { title: "", description: "", dateCreated: "", dueDate: "", status: "" }
+    ]
+  }
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Todo App</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    )
+    return <SiteBox />
   }
 }
 
