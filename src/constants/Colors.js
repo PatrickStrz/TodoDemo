@@ -1,5 +1,7 @@
 var Color = require('color')
 const background = '#292D3E'
+const main = '#7E57C2'
+
 export default {
   background,
   backgroundDark: Color(background)
@@ -8,7 +10,7 @@ export default {
   outline: Color(background)
     .lighten(0.5)
     .toString(),
-  main: '#7E57C2',
+  main,
   success: '#4ee097',
   text: '#fff'
 }

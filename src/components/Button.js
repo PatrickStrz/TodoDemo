@@ -1,4 +1,5 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import PropTypes from 'prop-types'
 import COLORS from '../constants/Colors'
 import STATUS from '../constants/Status'
 
@@ -12,6 +13,12 @@ const Button = styled.div`
   cursor: pointer;
   border: 2px solid ${COLORS.main};
   border-radius: 2px;
+  ${props =>
+    props.active &&
+    css`
+      color: ${COLORS.text};
+      background-color: ${COLORS.main};
+    `};
 `
 
 export default Button

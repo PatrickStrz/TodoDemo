@@ -4,6 +4,7 @@ import COLORS from './constants/Colors'
 import STATUS from './constants/Status'
 import CreateTodoForm from './components/CreateTodoForm'
 import TodoItem from './components/TodoItem'
+import Button from './components/Button'
 
 const SiteBox = styled.div`
   display: flex;
@@ -22,15 +23,54 @@ const SiteBox = styled.div`
   }
 `
 
+const FilterButtonsBox = styled.div`
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
 class App extends Component {
   state = {
     todos: [],
-    editModalVisible: false
+    editModalVisible: false,
+    filterBy: null
   }
   render() {
+    const getFilteredTodos = () => {
+      switch (this.state.filterBy) {
+        case null:
+          return this.state.todos
+        case STATUS.DONE:
+          return this.state.todos.filter(todo => todo.status === STATUS.DONE)
+        case STATUS.PENDING:
+          return this.state.todos.filter(todo => todo.status === STATUS.PENDING)
+      }
+    }
+
     return (
       <SiteBox>
-        {this.state.todos.map(todo => (
+        <FilterButtonsBox>
+          <Button
+            active={this.state.filterBy === null}
+            onClick={() => this._setFilter(null)}
+          >
+            ALL
+          </Button>
+          <Button
+            active={this.state.filterBy === STATUS.PENDING}
+            onClick={() => this._setFilter(STATUS.PENDING)}
+          >
+            PENDING
+          </Button>
+          <Button
+            active={this.state.filterBy === STATUS.DONE}
+            onClick={() => this._setFilter(STATUS.DONE)}
+          >
+            DONE
+          </Button>
+        </FilterButtonsBox>
+        {getFilteredTodos().map(todo => (
           <TodoItem
             key={todo.id}
             id={todo.id}
@@ -51,13 +91,15 @@ class App extends Component {
     )
   }
 
-  addToList = (todos, newTodo) => {
+  _setFilter = filterName => this.setState({ filterBy: filterName })
+
+  _addToList = (todos, newTodo) => {
     return [...todos, newTodo]
   }
 
   _handleTodoSubmit = todo => {
     this.setState((prevState, props) => {
-      return { todos: this.addToList(prevState.todos, todo) }
+      return { todos: this._addToList(prevState.todos, todo) }
     })
   }
   _handleDeleteClick = () => {

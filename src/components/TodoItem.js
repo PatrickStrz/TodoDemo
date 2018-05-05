@@ -8,6 +8,7 @@ import EditTodoForm from './EditTodoForm'
 
 const Box = styled.div`
   margin-bottom: 10px;
+  padding: 5px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -16,14 +17,29 @@ const Box = styled.div`
   background-color: ${props => (props.done ? COLORS.success : COLORS.outline)};
   color: ${COLORS.text};
 `
+const ActionsBox = styled.div`
+  width: 30%;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`
+const ContentBox = styled.div`
+  width: 70%;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`
 
 const TextButton = styled.p`
   color: ${COLORS.text};
   cursor: pointer;
 `
 
-const P = styled.p`
+const Text = styled.p`
   margin: 5px;
+  flex: 1;
 `
 
 const TodoItem = ({
@@ -42,18 +58,24 @@ const TodoItem = ({
 }) => {
   return (
     <Box done={status === STATUS.DONE}>
-      <P>{title}</P>
-      <P>{description}</P>
-      <P>{dueDate}</P>
-      <TextButton onClick={onEditClick}>Edit</TextButton>
-      <TextButton
-        onClick={() => {
-          onToggleStatus(id)
-        }}
-      >
-        {status === STATUS.DONE ? 'Mark pending' : 'Mark Done'}
-      </TextButton>
-      <TextButton onClick={() => onDeleteClick(id)}>X</TextButton>
+      <ContentBox>
+        <Text>{title}</Text>
+        <Text>{description}</Text>
+        <Text>{dueDate}</Text>
+      </ContentBox>
+
+      <ActionsBox>
+        <TextButton onClick={onEditClick}>Edit</TextButton>
+        <TextButton
+          onClick={() => {
+            onToggleStatus(id)
+          }}
+        >
+          {status === STATUS.DONE ? 'Mark pending' : 'Mark Done'}
+        </TextButton>
+        <TextButton onClick={() => onDeleteClick(id)}>X</TextButton>
+      </ActionsBox>
+
       <Modal
         isOpen={editModalVisible}
         onRequestClose={onEditModalClose}

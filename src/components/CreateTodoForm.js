@@ -10,7 +10,7 @@ import STATUS from '../constants/Status'
 import Button from './Button'
 
 const Box = styled.div`
-  margin-top: w0px;
+  margin-top: 25px;
   padding: 15px;
   display: flex;
   flex-direction: column;
@@ -69,7 +69,9 @@ export default class CreateTodoForm extends Component {
           selected={this.state.dueDate}
           onChange={this._handleDueDateChange}
         />
-        <Button onClick={this._handleSubmit}>Submit</Button>
+        <Button style={{ marginTop: 20 }} onClick={this._handleSubmit}>
+          Submit
+        </Button>
       </Box>
     )
   }
