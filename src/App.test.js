@@ -5,6 +5,7 @@ import { configure, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import STATUS from './constants/Status'
 import TodoItem from './components/TodoItem'
+import toJson from 'enzyme-to-json'
 
 configure({ adapter: new Adapter() })
 
@@ -63,5 +64,11 @@ describe('<App/>', () => {
     setData(wrapper)
     setFilterBy(wrapper, STATUS.PENDING)
     expect(wrapper.find('TodoItem')).toHaveLength(1)
+  })
+
+  it('matches the snapshot', () => {
+    const tree = shallow(<App />)
+    setData(tree)
+    expect(toJson(tree)).toMatchSnapshot()
   })
 })
