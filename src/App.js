@@ -72,7 +72,6 @@ class App extends Component {
         </FilterButtonsBox>
         {getFilteredTodos().map(todo => (
           <TodoItem
-            className="todo"
             key={todo.id}
             id={todo.id}
             title={todo.title}
@@ -102,9 +101,6 @@ class App extends Component {
     this.setState((prevState, props) => {
       return { todos: this._addToList(prevState.todos, todo) }
     })
-  }
-  _handleDeleteClick = () => {
-    alert('clicked delete')
   }
 
   _handleToggleStatus = id => {

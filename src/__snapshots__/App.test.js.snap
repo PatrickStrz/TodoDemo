@@ -23,7 +23,6 @@ exports[`<App/> matches the snapshot 1`] = `
     </styled.div>
   </styled.div>
   <TodoItem
-    className="todo"
     description="description 1"
     dueDate=""
     editModalVisible={false}
@@ -38,7 +37,6 @@ exports[`<App/> matches the snapshot 1`] = `
     title="pending todo"
   />
   <TodoItem
-    className="todo"
     description="description 1"
     dueDate=""
     editModalVisible={false}
@@ -53,7 +51,6 @@ exports[`<App/> matches the snapshot 1`] = `
     title="completed todo"
   />
   <TodoItem
-    className="todo"
     description="description 1"
     dueDate=""
     editModalVisible={false}
