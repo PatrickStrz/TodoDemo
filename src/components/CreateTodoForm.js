@@ -55,14 +55,14 @@ export default class CreateTodoForm extends Component {
           placeholder="Title"
           value={this.state.title}
           name="title"
-          onChange={this._handleTitleChange}
+          onChange={this._handleValueChange('title')}
         />
         <Input
           type="text"
           placeholder="Description"
           value={this.state.description}
           name="description"
-          onChange={this._handleDescriptionChange}
+          onChange={this._handleValueChange('description')}
         />
         <Label>Pick a due date:</Label>
         <DatePicker
@@ -76,13 +76,9 @@ export default class CreateTodoForm extends Component {
     )
   }
 
-  _handleTitleChange = e => {
-    this.setState({ title: e.target.value })
+  _handleValueChange = name => e => {
+    this.setState({ [name]: e.target.value })
   }
-  _handleDescriptionChange = e => {
-    this.setState({ description: e.target.value })
-  }
-  _handleDueDateChange = date => this.setState({ dueDate: date })
 
   _clearValues = () =>
     this.setState({

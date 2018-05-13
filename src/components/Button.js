@@ -1,7 +1,5 @@
 import styled, { css } from 'styled-components'
-import PropTypes from 'prop-types'
 import COLORS from '../constants/Colors'
-import STATUS from '../constants/Status'
 
 const Button = styled.div`
   display: flex;
