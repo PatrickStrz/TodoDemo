@@ -72,6 +72,7 @@ class App extends Component {
         </FilterButtonsBox>
         {getFilteredTodos().map(todo => (
           <TodoItem
+            className="todo"
             key={todo.id}
             id={todo.id}
             title={todo.title}
