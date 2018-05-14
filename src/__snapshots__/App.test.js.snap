@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App/> matches the snapshot 1`] = `
+<styled.div>
+  <styled.div>
+    <styled.div
+      active={true}
+      onClick={[Function]}
+    >
+      ALL
+    </styled.div>
+    <styled.div
+      active={false}
+      onClick={[Function]}
+    >
+      PENDING
+    </styled.div>
+    <styled.div
+      active={false}
+      onClick={[Function]}
+    >
+      DONE
+    </styled.div>
+  </styled.div>
+  <TodoItem
+    description="description 1"
+    dueDate=""
+    editModalVisible={false}
+    id="1"
+    key="1"
+    onDeleteClick={[Function]}
+    onEditClick={[Function]}
+    onEditModalClose={[Function]}
+    onEditSubmit={[Function]}
+    onToggleStatus={[Function]}
+    status="PENDING"
+    title="pending todo"
+  />
+  <TodoItem
+    description="description 1"
+    dueDate=""
+    editModalVisible={false}
+    id="2"
+    key="2"
+    onDeleteClick={[Function]}
+    onEditClick={[Function]}
+    onEditModalClose={[Function]}
+    onEditSubmit={[Function]}
+    onToggleStatus={[Function]}
+    status="DONE"
+    title="completed todo"
+  />
+  <TodoItem
+    description="description 1"
+    dueDate=""
+    editModalVisible={false}
+    id="3"
+    key="3"
+    onDeleteClick={[Function]}
+    onEditClick={[Function]}
+    onEditModalClose={[Function]}
+    onEditSubmit={[Function]}
+    onToggleStatus={[Function]}
+    status="DONE"
+    title="completed todo"
+  />
+  <CreateTodoForm
+    onSubmit={[Function]}
+  />
+</styled.div>
+`;

@@ -102,9 +102,6 @@ class App extends Component {
       return { todos: this._addToList(prevState.todos, todo) }
     })
   }
-  _handleDeleteClick = () => {
-    alert('clicked delete')
-  }
 
   _handleToggleStatus = id => {
     const { todos } = this.state
